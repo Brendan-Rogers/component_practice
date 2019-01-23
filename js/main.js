@@ -1,26 +1,32 @@
 // SEAF (Self Executing Anonymous Function)
 (()=> { console.log('connected');
 
-const liveuser = {
-	props: ['first_name', 'last_name', 'role'],
-	// PROPERTIES
-	// a placeholder for data. to make the website dynamic
+const homePageComponent = {
+	template: "<h2>You're on the home page</h2>"
+};
 
-	template: "#activeuser",
+const usersPageComponent = {
+	template: "<h2>You're on the users page</h2>"
+};
 
-	methods: {
-		logChildMsg() {
-			console.log('the child responds in kind');
-		},
-		runParentFunc() {
-			this.$emit('passfunc', 'hello from the child on click');
-		}
-	},
+const contactPageComponent = {
+	template: "<h2>You're on the contact page</h2>"
+};
 
-	created: function() {
-		console.log('child component is live');
-	}
-}
+const errorPageComponent = {
+	template: "<h2>404 you are one the ERROR page</h2>"
+};
+
+const routes = [
+	{ path: '/', name: 'home', component: homePageComponent },
+	{ path: '/users', name: 'users', component: usersPageComponent },
+	{ path: '/contact', name: 'contact', component: contactPageComponent },
+	{ path: '/*', name: 'error', component: errorPageComponent }
+];
+
+const router = new VueRouter({
+	routes
+});
 
 const vm = new Vue({
 	el: '#app',
@@ -29,22 +35,22 @@ const vm = new Vue({
 		message: "Hello World"
 	},
 
-	created: function () { console.log('parent is live');
-
-	},
-
 	methods: {
 		logParent(message) {
 			console.log('from the parent', message);
 		},
-		logmain() {
-			console.log('the child has called. it lives in the parent.');
+
+		logMainMessage(message) {
+			console.log("called from inside a child, lives in the parent", message);
 		}
 	},
 
 	components: {
-		user: liveuser,
-	}
+		'homePageComponent': homePageComponent,
+		'usersPageComponent': usersPageComponent
+	},
+
+	router: router
 
 });
 

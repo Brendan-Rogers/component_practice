@@ -4,6 +4,7 @@
 	<title>COMPONENT PRACTICE</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.2/vue-router.min.js"></script>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,36 +13,16 @@
 <body>
 
 <main>
-
-	<nav>
-		<ul class="main-nav">
-			<li class="nav-item">Home</li>
-			<li class="nav-item">Users</li>
-			<li class="nav-item">Porfolio</li>
-			<li class="nav-item">Contact</li>
-		</ul>
-	</nav>
-
-	<article>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere officiis, itaque nihil, sunt doloribus vero quo cumque dignissimos cum illum at voluptatibus nam eum quaerat reprehenderit veritatis quasi sit iure.
-		Fugiat eos voluptatem aut possimus ducimus maiores accusantium tempora qui in perspiciatis. Magnam consequuntur ad aperiam quis excepturi ipsum rem, omnis beatae natus, eos culpa sit, minus rerum soluta unde.
-	</article>
-
-
 	<div id="app">
-		<user first_name="Brendan" last_name="Rogers" role="back end b o i" @passFuncCallIp='logmain'></user>
-		<user first_name="Aiden" last_name="Rieckenbrauck" role="visuals u n i t"></user>
+		<router-link class="link" :to="{ path: '/'}">Home</router-link>
+		<router-link class="link" :to="{ path: '/users'}">Users</router-link>
+		<router-link class="link" :to="{ path: '/contact'}">Contact</router-link>
+		<!-- the router view element is where the components get rendered when changing the address bar (the route) -->
+		<transition name="fade" mode="out-in">
+			<router-view></router-view>
+		</transition>
 	</div>
 </main>
-
-<!-- TEMPLATES -->
-<template id="activeuser">
-	<div>
-		<p> {{ first_name }} {{ last_name }} is the {{ role }} at GOLD </p>
-		<button v-on:click="logChildMsg">Say Hello to the Child</button>
-		<button v-on:click="runParentFunc">Greet the Parent</button>
-	</div>
-</template>
 
 
 <script src="js/main.js"></script>
