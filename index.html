@@ -3,6 +3,7 @@
 <head>
 	<title>COMPONENT PRACTICE</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.22/dist/vue.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.2/vue-router.min.js"></script>
 	<meta charset="utf-8">
@@ -14,17 +15,29 @@
 
 <main>
 	<div id="app">
-		<router-link class="link" :to="{ path: '/'}">Home</router-link>
-		<router-link class="link" :to="{ path: '/users'}">Users</router-link>
-		<router-link class="link" :to="{ path: '/contact'}">Contact</router-link>
+
+		<router-link v-if="authenticated" to="/login" v-on:click.native="logout()">Log Out</router-link>
 		<!-- the router view element is where the components get rendered when changing the address bar (the route) -->
+	
 		<transition name="fade" mode="out-in">
-			<router-view></router-view>
+			<router-view @authenticated="setAuthenticated">
 		</transition>
+
 	</div>
 </main>
 
 
-<script src="js/main.js"></script>
+<!-- TEMPLATES -->
+<template id="userList">
+	<div>
+		<h3>Current User:
+			<span v-if="users.length > 0">
+				{{ users[0].first_name }}  {{ users[0].last_name }}
+			</span>
+		</h3>
+	</div>
+</template>
+
+<script type='module' src="js/main.js"></script>
 </body>
 </html>
